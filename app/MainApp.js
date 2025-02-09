@@ -1,12 +1,12 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import CreateCategoryScreen from "./CreateCategoryScreen";
-import { customTheme } from "./app_theme";
+import CreateCategoryScreen from "./screens/CreateCategoryScreen";
+import { customTheme } from "./config/app_theme";
 
 import { Provider as PaperProvider } from "react-native-paper";
 
-export default function App() {
+/*export default function MainApp() {
   return (
     <PaperProvider theme={customTheme}>
       <SafeAreaView
@@ -19,6 +19,19 @@ export default function App() {
           <CreateCategoryScreen></CreateCategoryScreen>
         </View>
       </SafeAreaView>
+    </PaperProvider>
+  );
+}*/
+
+//import React from "react";
+import AppNavigator from "./navigation/AppNavigator";
+//import { Provider as PaperProvider } from "react-native-paper";
+//import { customTheme } from "./config/app_theme";
+
+export default function MainApp() {
+  return (
+    <PaperProvider theme={customTheme}>
+      <AppNavigator />
     </PaperProvider>
   );
 }
