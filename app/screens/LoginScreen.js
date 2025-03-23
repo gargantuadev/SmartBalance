@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { View, TextInput, Button, StyleSheet, Text, Alert } from "react-native";
-import { auth } from "../config/firebaseConfig"; // Import auth
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../config/firebaseConfig"; // Import updated auth
 
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState("");
@@ -8,8 +9,8 @@ export default function LoginScreen({ navigation }) {
 
   const handleLogin = async () => {
     try {
-      await auth.signInWithEmailAndPassword(email, password);
-      navigation.replace("CreateCategory"); // Redirect to Home after login
+      await signInWithEmailAndPassword(auth, email, password);
+      navigation.replace("CreateCategory"); // Redirect to home screen
     } catch (error) {
       Alert.alert("Error", error.message);
     }

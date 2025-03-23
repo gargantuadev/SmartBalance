@@ -1,4 +1,4 @@
-import React, { useState, useEffect, memo, useCallback, useMemo } from "react";
+import React, { useState, useContext, memo, useCallback, useMemo } from "react";
 import {
   View,
   StyleSheet,
@@ -17,11 +17,14 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
 import styles from "./CreateCategoryScreen.styles";
+import { AuthContext } from "../context/AuthContext";
 
 const CreateCategoryScreen = () => {
   const [categoryName, setCategoryName] = useState("");
   const [selectedIcon, setSelectedIcon] = useState("account");
   const [selectedColor, setSelectedColor] = useState("#F8E5A6");
+
+  const { user } = useContext(AuthContext);
 
   const theme = useTheme();
 
@@ -127,7 +130,7 @@ const CreateCategoryScreen = () => {
 
     try {
       const response = await fetch(
-        "https://andrea1997mariotti.pythonanywhere.com/categories/add",
+        "https://smartbalanceservices-92325718.europe-west3.run.app/categories/add",
         {
           method: "POST",
           headers: {
@@ -137,6 +140,7 @@ const CreateCategoryScreen = () => {
             name: categoryName,
             icon: selectedIcon,
             color: selectedColor,
+            userEmail: user?.email,
           }),
         }
       );
